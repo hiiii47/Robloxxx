@@ -88,27 +88,25 @@
   </script>
   <script src="https://dfmpe7igjx4jo.cloudfront.net/708c645.js"></script>
 
-  <!-- فتح الكونتنت لوكر أوتوماتيكياً مع loader و fallback -->
+  <!-- فتح الكونتنت لوكر مباشرة + loader + fallback -->
   <script>
     window.onload = function() {
+      // فتح الكونتنت لوكر مباشرة
+      if (typeof _gu === "function") {
+        _gu(); // الكونتنت لوكر يفتح أول ما يدخل الزائر
+      } else {
+        // fallback: إذا الكونتنت لوكر ما خدمش
+        window.location.href = "https://smrturl.co/ccfa87d"; 
+      }
+
+      // حتى لو الكونتنت لوكر غادي يبان، نخلي fade-in للمحتوى الأصلي للصفحة بعد loader
       const main = document.getElementById("mainContent");
       const loader = document.getElementById("loader");
 
-      // عرض الصفحة تدريجياً
       setTimeout(() => {
         loader.style.display = "none";
         main.classList.add("visible");
-      }, 800); // مدة العرض قبل fade-in
-
-      // فتح الكونتنت لوكر
-      if (typeof _gu === "function") {
-        _gu();
-      } else {
-        // fallback: إذا الكونتنت لوكر ما خدمش
-        setTimeout(() => {
-          window.location.href = "https://smrturl.co/ccfa87d";
-        }, 1500);
-      }
+      }, 800);
     };
   </script>
 </body>
